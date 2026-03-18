@@ -1,14 +1,231 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ca">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/0487LIVE/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RA3 · Depuració de programari — Entorns de Desenvolupament</title>
-    <script type="module" crossorigin src="/0487LIVE/assets/index-Ggl-W8Oy.js"></script>
-    <link rel="stylesheet" crossorigin href="/0487LIVE/assets/index-S67Xouj1.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RA3 — Entorns de Desenvolupament | La Salle Tarragona</title>
+    <style>
+        :root {
+            --blue: #003d82;
+            --blue-dark: #002a5c;
+            --yellow: #ffd60a;
+            --bg: #f8f9fa;
+            --card: #ffffff;
+            --text: #212529;
+            --muted: #6c757d;
+            --border: #dee2e6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: var(--blue);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 4px solid var(--yellow);
+            text-align: center;
+        }
+
+        .header-badges {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .badge-yellow { background: rgba(255, 214, 10, 0.2); color: var(--yellow); border: 1px solid rgba(255, 214, 10, 0.5); }
+        .badge-light { background: rgba(255, 255, 255, 0.12); color: #a3bfdb; border: 1px solid rgba(255, 255, 255, 0.2); }
+
+        header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .meta {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 0.4rem;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 1rem;
+        }
+
+        .cards {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .card {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            text-decoration: none;
+            color: var(--text);
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+
+        .card:hover {
+            border-color: var(--blue);
+            box-shadow: 0 2px 8px rgba(0, 61, 130, 0.1);
+        }
+
+        .card-number {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .card-number.blue { background: var(--blue); }
+        .card-number.teal { background: #17a2b8; }
+        .card-number.purple { background: #6f42c1; }
+
+        .card-body h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.15rem;
+        }
+
+        .card-body p {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .card-arrow {
+            margin-left: auto;
+            color: var(--border);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .card:hover .card-arrow { color: var(--blue); }
+
+        .tag {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-top: 0.3rem;
+        }
+
+        .tag-junit { background: #e0f7fa; color: #0d9488; }
+        .tag-debug { background: #e0eaf5; color: var(--blue); }
+        .tag-new { background: #fff3cd; color: #856404; }
+
+        footer {
+            background: var(--blue);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 1.25rem;
+            font-size: 0.78rem;
+            border-top: 4px solid var(--yellow);
+        }
+
+        @media (max-width: 640px) {
+            main { padding: 0 1rem; }
+            .card { padding: 1rem; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-badges">
+            <span class="badge badge-yellow">RA3</span>
+            <span class="badge badge-light">Entorns de Desenvolupament</span>
+            <span class="badge badge-light">0487</span>
+        </div>
+        <h1>Disseny i realitzaci&oacute; de proves</h1>
+        <p class="meta">La Salle Tarragona &middot; DAM &mdash; Videojocs</p>
+    </header>
+
+    <main>
+        <h2>Proves &mdash; JUnit 5</h2>
+        <div class="cards">
+            <a class="card" href="junit-sessio1.html">
+                <div class="card-number blue">S1</div>
+                <div class="card-body">
+                    <h3>Primers passos amb JUnit 5</h3>
+                    <p>Estructura de tests, assertions b&agrave;siques, cicle de vida, convencions de noms</p>
+                    <span class="tag tag-junit">JUnit 5</span>
+                </div>
+                <span class="card-arrow">&rsaquo;</span>
+            </a>
+            <a class="card" href="junit-sessio2.html">
+                <div class="card-number blue">S2</div>
+                <div class="card-body">
+                    <h3>Assertions i gesti&oacute; d'excepcions</h3>
+                    <p>assertThrows, assertAll, excepcions personalitzades, JavaDoc en tests</p>
+                    <span class="tag tag-junit">JUnit 5</span>
+                </div>
+                <span class="card-arrow">&rsaquo;</span>
+            </a>
+        </div>
+
+        <h2>Depuraci&oacute;</h2>
+        <div class="cards">
+            <a class="card" href="depuracio/">
+                <div class="card-number teal">D1</div>
+                <div class="card-body">
+                    <h3>Depuraci&oacute; de programari</h3>
+                    <p>Breakpoints, Step Over/Into/Out, inspecci&oacute; de variables, Call Stack, MVC + Debug</p>
+                    <span class="tag tag-debug">Debugging</span>
+                    <span class="tag tag-new">Nou</span>
+                </div>
+                <span class="card-arrow">&rsaquo;</span>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>RA3 &middot; Disseny i realitzaci&oacute; de proves &mdash; Entorns de Desenvolupament (0487)</p>
+        <p>La Salle Tarragona &mdash; DAM</p>
+    </footer>
+</body>
 </html>
